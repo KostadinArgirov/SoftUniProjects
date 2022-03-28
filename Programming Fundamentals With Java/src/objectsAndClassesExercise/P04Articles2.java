@@ -1,9 +1,6 @@
 package objectsAndClassesExercise;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class P04Articles2 {
     public static void main(String[] args) {
@@ -26,13 +23,16 @@ public class P04Articles2 {
 
         switch (command) {
             case "title":
-                articles.sort(Comparator.comparing(Article::getTitle));
+                articles.sort((a,b) -> b.getTitle().compareTo(a.getTitle()));
+//                articles.sort(Comparator.comparing(Article::getTitle));
                 break;
             case "content":
-                articles.sort(Comparator.comparing(Article::getContent));
+                articles.sort((a,b) -> b.getContent().compareTo(a.getContent()));
+//                articles.sort(Comparator.comparing(Article::getContent));
                 break;
             case "author":
-                articles.sort(Comparator.comparing(Article::getAuthor));
+                articles.sort((a,b) -> b.getAuthor().compareTo(a.getAuthor()));
+//                articles.sort(Comparator.comparing(Article::getAuthor));
                 break;
         }
         for (Article article : articles) {
@@ -69,3 +69,66 @@ public class P04Articles2 {
         }
     }
 }
+
+
+//        List<Article> articleList=new LinkedList<>();
+//        int n=Integer.parseInt(scanner.nextLine());
+//        for (int i = 0; i < n; i++) {
+//            String [] articleToken=scanner.nextLine().split(", ");
+//            String title=articleToken[0];
+//            String content=articleToken[1];
+//            String author=articleToken[2];
+//            Article article=new Article(title,content,author);
+//            if(!articleList.contains(article)){
+//                articleList.add(article);
+//            }
+//        }
+//        String filter=scanner.nextLine();
+//        switch (filter){
+//            case "content":
+//                Collections.sort(articleList, new Comparator<Article>() {
+//                    @Override
+//                    public int compare(Article o1, Article o2) {
+//                        return o2.content.compareTo(o1.content);
+//                    }
+//                });
+//                break;
+//            case "title":
+//                Collections.sort(articleList, new Comparator<Article>() {
+//                    @Override
+//                    public int compare(Article o1, Article o2) {
+//                        return o2.title.compareTo(o1.title);
+//                    }
+//                });
+//                break;
+//            case "author":
+//                Collections
+//                        .sort(articleList, new Comparator<Article>() {
+//                    @Override
+//                    public int compare(Article o1, Article o2) {
+//                        return o2.author.compareTo(o1.author);
+//                    }
+//                });
+//                break;
+//        }
+//        for (Article article : articleList) {
+//            System.out.println(article);
+//        }
+//    }
+//    static class Article{
+//        String title;
+//        String content;
+//        String author;
+//
+//        public Article(String title, String content, String author) {
+//            this.title = title;
+//            this.content = content;
+//            this.author = author;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return String.format("%s - %s: %s",this.title,this.content,this.author);
+//        }
+//    }
+//}
