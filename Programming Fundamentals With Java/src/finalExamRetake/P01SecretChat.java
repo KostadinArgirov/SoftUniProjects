@@ -2,7 +2,7 @@ package finalExamRetake;
 
 import java.util.Scanner;
 
-public class P01PasswordReset {
+public class P01SecretChat {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
