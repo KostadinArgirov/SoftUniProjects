@@ -5,35 +5,19 @@ import java.util.*;
 public class P02SimpleCalculator {
     public static void main(String[] args) {
 
-//        НЕ Е ОК ЗАДАЧАТА!!!
-
         Scanner scanner = new Scanner(System.in);
 
-        String[] tokens = scanner.nextLine().split("\\s+");
-
-        ArrayDeque<String> stack = new ArrayDeque<>();
-        Collections.addAll(stack, tokens);
-
-//        for (String token : tokens) {
-//            stack.push(token);
-//        }
-        Arrays.stream(tokens)
-                .forEach(stack::push);
-
-        while (stack.size() > 1) {
-            int first = Integer.parseInt(stack.pop());
-            String op = stack.pop();
-            int second = Integer.parseInt(stack.pop());
-
-            switch (op) {
-                case "+":
-                    stack.push(String.valueOf(first + second));
-                    break;
-                case "-":
-                    stack.push(String.valueOf(first - second));
-                    break;
-            }
-            System.out.println(stack.pop());
+        String[] input = scanner.nextLine().split("\\s+");
+        ArrayDeque<String> calculation = new ArrayDeque<>();
+        Collections.addAll(calculation, input);
+        while (calculation.size()>1){
+            sum(calculation.pop(), calculation.pop(), calculation.pop(), calculation);
         }
+        System.out.println(calculation.peek());
+    }
+
+    private static void sum(String pop, String pop1, String pop2, ArrayDeque<String> calculation) {
+        if("+".equals(pop1)) calculation.push(String.valueOf(Integer.parseInt(pop)+Integer.parseInt(pop2)));
+        else calculation.push(String.valueOf(Integer.parseInt(pop)-Integer.parseInt(pop2)));
     }
 }
