@@ -1,6 +1,5 @@
 package setsAndMapsAdvancedLab;
 
-import java.util.LinkedHashSet;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
