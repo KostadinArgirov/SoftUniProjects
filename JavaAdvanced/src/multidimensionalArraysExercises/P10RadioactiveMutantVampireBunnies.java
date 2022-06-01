@@ -1,111 +1,197 @@
 package multidimensionalArraysExercises;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class P10RadioactiveMutantVampireBunnies {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String[] rowColumn = scanner.nextLine().split("\\s+");
-        int row = Integer.parseInt(rowColumn[0]);
-        int col = Integer.parseInt(rowColumn[1]);
-        Character[][] matrix = new Character[row][col];
-        int playerRow = 0;
-        int playerCol = 0;
-        List<int[]> bunny = new ArrayList<>();
+        int[] size = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int r = size[0];
+        int c = size[1];
 
-        for (int i = 0; i < row; i++) {
+        String[][] lair = new String[r][c];
+        //fil the lair matrix
+        for (int i = 0; i < r; i++) {
             String input = scanner.nextLine();
-            for (int j = 0; j < col; j++) {
-                switch (input.charAt(j)) {
-                    case 'P':
-                        playerRow = i;
-                        playerCol = j;
-                        matrix[i][j] = '.';
-                        break;
-                    case '.':
-                        matrix[i][j] = input.charAt(j);
-                        break;
-                    case 'B':
-                        matrix[i][j] = input.charAt(j);
-                        int[] coordinateToAdd = new int[2];
-                        coordinateToAdd[0] = i;
-                        coordinateToAdd[1] = j;
-                        bunny.add(coordinateToAdd);
-                        break;
-                }
+            for (int j = 0; j < input.length(); j++) {
+                lair[i][j] = String.valueOf(input.charAt(j));
             }
         }
 
-        String command = scanner.nextLine();
-        boolean won = false;
-        boolean dead = false;
+        boolean playerEscapes = false;
+        boolean playerHitBunny = false;
+        int[] coordinates = getPlayerCoordinated(lair);
+        int playerRow = coordinates[0];
+        int playerCol = coordinates[1];
+        String[] actions = scanner.nextLine().split("");
+        for (int i = 0; i < actions.length; i++) {
+            String action = actions[i];
+            switch (action) {
+                case "U":
+                    // move up
+                    if (playerRow - 1 >= 0) {
+                        lair[playerRow][playerCol] = ".";
+                        playerRow--;
+                        if (lair[playerRow][playerCol].equals("B")) {
+                            playerHitBunny = true;
+                        } else {
+                            lair[playerRow][playerCol] = "P";
+                        }
+                    } else {
+                        lair[playerRow][playerCol] = ".";
+                        playerEscapes = true;
+                    }
+                    break;
+                case "L":
+                    // move left
+                    if (playerCol - 1 >= 0) {
+                        // move player
+                        lair[playerRow][playerCol] = ".";
+                        playerCol--;
+                        if (lair[playerRow][playerCol].equals("B")) {
+                            playerHitBunny = true;
 
-        for (int i = 0; i < command.length(); i++) {
-            switch (command.charAt(i)) {
-                case 'L':
-                    if (playerCol != 0) playerCol--;
-                    else won = true;
+                        } else {
+                            lair[playerRow][playerCol] = "P";
+                        }
+                    } else {
+                        lair[playerRow][playerCol] = ".";
+                        playerEscapes = true;
+                    }
                     break;
-                case 'U':
-                    if (playerRow != 0) playerRow--;
-                    else won = true;
+                case "R":
+                    //move right
+                    if (playerCol + 1 < lair[playerRow].length) {
+                        // move player
+                        lair[playerRow][playerCol] = ".";
+                        playerCol++;
+                        if (lair[playerRow][playerCol].equals("B")) {
+                            playerHitBunny = true;
+
+                        } else {
+                            lair[playerRow][playerCol] = "P";
+                        }
+                    } else {
+                        lair[playerRow][playerCol] = ".";
+                        playerEscapes = true;
+                    }
                     break;
-                case 'R':
-                    if (playerCol != col - 1) playerCol++;
-                    else won = true;
-                    break;
-                case 'D':
-                    if (playerRow != row - 1) playerRow++;
-                    else won = true;
+                case "D":
+                    // move down
+                    if (playerRow + 1 < lair.length) {
+                        // move player
+                        lair[playerRow][playerCol] = ".";
+                        playerRow++;
+                        if (lair[playerRow][playerCol].equals("B")) {
+                            playerHitBunny = true;
+
+                        } else {
+                            lair[playerRow][playerCol] = "P";
+                        }
+                    } else {
+                        lair[playerRow][playerCol] = ".";
+                        playerEscapes = true;
+                    }
                     break;
             }
 
-            for (int j = bunny.size() - 1; j >= 0; j--) {
-                int bunnyRow = bunny.get(j)[0];
-                int bunnyCol = bunny.get(j)[1];
-                bunny.remove(j);
-                if (bunnyRow != 0) {
-                    matrix[bunnyRow - 1][bunnyCol] = 'B';
-                    int[] coordinateToAdd = new int[2];
-                    coordinateToAdd[0] = bunnyRow - 1;
-                    coordinateToAdd[1] = bunnyCol;
-                    bunny.add(coordinateToAdd);
-                }
-                if (bunnyCol != col - 1) {
-                    matrix[bunnyRow][bunnyCol + 1] = 'B';
-                    int[] coordinateToAdd = new int[2];
-                    coordinateToAdd[0] = bunnyRow;
-                    coordinateToAdd[1] = bunnyCol + 1;
-                    bunny.add(coordinateToAdd);
-                }
-                if (bunnyCol != 0) {
-                    matrix[bunnyRow][bunnyCol - 1] = 'B';
-                    int[] coordinateToAdd = new int[2];
-                    coordinateToAdd[0] = bunnyRow;
-                    coordinateToAdd[1] = bunnyCol - 1;
-                    bunny.add(coordinateToAdd);
-                }
-                if (bunnyRow != row - 1) {
-                    matrix[bunnyRow + 1][bunnyCol] = 'B';
-                    int[] coordinateToAdd = new int[2];
-                    coordinateToAdd[0] = bunnyRow + 1;
-                    coordinateToAdd[1] = bunnyCol;
-                    bunny.add(coordinateToAdd);
-                }
+            if (!breedBunnies(lair)) {
+                printLair(lair);
+                printGameOver(playerRow, playerCol, "dead");
+                return;
             }
-
-            if (matrix[playerRow][playerCol] == 'B' && !won) dead = true;
-            if (dead || won) break;
+            if (playerHitBunny) {
+                printLair(lair);
+                printGameOver(playerRow, playerCol, "dead");
+                return;
+            }
+            if (playerEscapes) {
+                printLair(lair);
+                printGameOver(playerRow, playerCol, "won");
+                return;
+            }
         }
-        Arrays.stream(matrix).forEach(s -> {
-            Arrays.stream(s).forEach(System.out::print);
+    }
+
+    private static void printLair(String[][] lair) {
+        for (int i = 0; i < lair.length; i++) {
+            for (int j = 0; j < lair[i].length; j++) {
+                System.out.print(lair[i][j]);
+            }
             System.out.println();
-        });
-        if (dead) System.out.printf("dead: %d %d", playerRow, playerCol);
-        else System.out.printf("won: %d %d", playerRow, playerCol);
+        }
+    }
+
+
+    private static boolean breedBunnies(String[][] lair) {
+        boolean toReturn = true;
+        String[][] newLair = new String[lair.length][lair[0].length];
+        for (int i = 0; i < lair.length; i++) {
+            for (int j = 0; j < lair[i].length; j++) {
+                newLair[i][j] = lair[i][j];
+            }
+        }
+        for (int i = 0; i < lair.length; i++) {
+            for (int j = 0; j < lair[i].length; j++) {
+                if (lair[i][j].equals("B")) {
+                    newLair[i][j] = "B";
+                    if (i != 0) {
+                        if (lair[i - 1][j].equals("P")) {
+
+                            toReturn = false;
+                        }
+                        newLair[i - 1][j] = "B";
+
+                    }
+                    if (i != lair.length - 1) {
+                        if (lair[i + 1][j].equals("P")) {
+
+                            toReturn = false;
+                        }
+                        newLair[i + 1][j] = "B";
+
+                    }
+                    if (j != 0) {
+                        if (lair[i][j - 1].equals("P")) {
+
+                            toReturn = false;
+                        }
+                        newLair[i][j - 1] = "B";
+
+                    }
+                    if (j != lair[i].length - 1) {
+                        if (lair[i][j + 1].equals("P")) {
+
+                            toReturn = false;
+                        }
+                        newLair[i][j + 1] = "B";
+
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < newLair.length; i++) {
+            for (int j = 0; j < newLair[i].length; j++) {
+                lair[i][j] = newLair[i][j];
+            }
+        }
+        return toReturn;
+    }
+
+    private static int[] getPlayerCoordinated(String[][] lair) {
+        for (int i = 0; i < lair.length; i++) {
+            for (int j = 0; j < lair[0].length; j++) {
+                if (lair[i][j].equals("P")) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return null;
+    }
+
+    private static void printGameOver(int playerRow, int playerCol, String status) {
+        System.out.printf("%s: %d %d", status, playerRow, playerCol);
     }
 }
