@@ -10,16 +10,7 @@ public class P03CustomMinFunction {
 
         int[] numbers = Arrays.stream(scanner.nextLine().split("\\s+")).mapToInt(Integer::parseInt).toArray();
 
-        Function<int[], Integer> smallestInt = (int[] arr) -> {
-            int min = Integer.MAX_VALUE;
-
-            for (int element : arr) {
-                if (element < min) {
-                    min = element;
-                }
-            }
-            return min;
-        };
+        Function<int[], Integer> smallestInt = arr -> Arrays.stream(arr).min().getAsInt();
         System.out.println(smallestInt.apply(numbers));
     }
 }
