@@ -8,9 +8,9 @@ public class Main {
 
         Map<String, Engine> engines = new HashMap<>();
 
-        int numberOfEngines = Integer.parseInt(scanner.nextLine());
+        int n = Integer.parseInt(scanner.nextLine());
 
-        while (numberOfEngines-- > 0) {
+        while (n-- > 0) {
 
             String[] engineData = scanner.nextLine().split("\\s+");
             String engineModel = engineData[0];
@@ -37,20 +37,20 @@ public class Main {
         List<Car> cars = new ArrayList<>();
         int m = Integer.parseInt(scanner.nextLine());
         while (m-- > 0) {
-            String[] input = scanner.nextLine().split("\\s+");
-            String model = input[0];
-            Engine engine = engines.get(input[1]);
+            String[] carInfo = scanner.nextLine().split("\\s+");
+            String model = carInfo[0];
+            Engine engine = engines.get(carInfo[1]);
             String weight = "n/a";
             String color = "n/a";
-            if (input.length > 2) {
+            if (carInfo.length > 2) {
                 try {
-                    int temp = Integer.parseInt(input[2]);
-                    weight = input[2];
-                    if (input.length > 3) {
-                        color = input[3];
+                    int temp = Integer.parseInt(carInfo[2]);
+                    weight = carInfo[2];
+                    if (carInfo.length > 3) {
+                        color = carInfo[3];
                     }
                 } catch (Exception e) {
-                    color = input[2];
+                    color = carInfo[2];
                 }
             }
             Car car = new Car(model, engine, weight, color);
