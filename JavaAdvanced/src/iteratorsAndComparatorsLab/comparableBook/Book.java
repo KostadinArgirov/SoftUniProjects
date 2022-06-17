@@ -1,4 +1,4 @@
-package iteratorsAndComparatorsLab.library;
+package iteratorsAndComparatorsLab.comparableBook;
 
 import java.util.Arrays;
 import java.util.List;
