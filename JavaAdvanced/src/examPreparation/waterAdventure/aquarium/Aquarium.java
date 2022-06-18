@@ -1,4 +1,4 @@
-package aquarium;
+package examPreparation.waterAdventure.aquarium;
 
 import java.util.HashMap;
 import java.util.Map;
