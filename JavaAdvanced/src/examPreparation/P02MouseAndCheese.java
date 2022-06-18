@@ -67,12 +67,6 @@ public class P02MouseAndCheese {
         print2dArray(field);
     }
 
-    /**
-     *
-     * @param field char[][] the mouse field
-     * @param rowMutator int mutator that will be added to the current row of the mouse
-     * @param colMutator int mutator that will be added to the current col of the mouse
-     */
     private static void moveMouse(char[][] field, int rowMutator, int colMutator) {
         int nextRow = row + rowMutator;
         int nextCol = col + colMutator;
