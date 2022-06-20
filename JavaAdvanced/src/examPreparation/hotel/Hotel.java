@@ -22,23 +22,28 @@ public class Hotel {
     }
 
     public boolean remove(String name) {
-        Person peopleToRemove = this.roster.stream().filter(s -> s.getName().equals(name)).findFirst().orElse(null);
-
-        if (peopleToRemove != null) {
-            this.roster.remove(peopleToRemove);
-            return true;
-        }
-        return false;
+        return roster.removeIf(person -> person.getName().equals(name));
+//        Person peopleToRemove = this.roster.stream().filter(s -> s.getName().equals(name)).findFirst().orElse(null);
+//
+//        if (peopleToRemove != null) {
+//            this.roster.remove(peopleToRemove);
+//            return true;
+//        }
+//        return false;
     }
 
     public Person getPerson(String name, String hometown) {
-        Person peopleToFind = this.roster.stream().filter(s -> s.getName().equals(name)).findFirst().orElse(null);
-        if (peopleToFind != null) {
-            if (peopleToFind.getHometown().equals(hometown)) {
-                return peopleToFind;
-            }
-        }
-        return null;
+        return roster.stream()
+                .filter(person -> person.getName().equals(name) && person.getHometown().equals(hometown))
+                .findFirst()
+                .orElse(null);
+//        Person peopleToFind = this.roster.stream().filter(s -> s.getName().equals(name)).findFirst().orElse(null);
+//        if (peopleToFind != null) {
+//            if (peopleToFind.getHometown().equals(hometown)) {
+//                return peopleToFind;
+//            }
+//        }
+//        return null;
     }
 
     public String getStatistics() {
