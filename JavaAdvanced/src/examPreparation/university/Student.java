@@ -25,7 +25,14 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student: " + firstName + " " + lastName + ", " + bestSubject;
+        return String.format("Student: %s %s, %s", this.firstName, this.lastName, this.bestSubject);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Student other = (Student) obj;
+        return this.firstName == other.firstName
+                && this.lastName == other.lastName
+                && this.bestSubject == other.bestSubject;
+    }
 }

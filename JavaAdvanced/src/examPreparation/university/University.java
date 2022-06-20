@@ -22,54 +22,50 @@ public class University {
     }
 
     public int getStudentCount() {
-        return students.size();
+        return this.students.size();
     }
 
     public String registerStudent(Student student) {
-        String result = null;
-
-        if (getStudentCount() >= capacity) {
-            result = "No seats in the exampreparation.university";
+        String message;
+        if (this.students.indexOf(student) > -1) {
+            message = "Student is already in the university";
+        } else if (this.capacity == this.students.size()) {
+            message = "No seats in the university";
+        } else {
+            this.students.add(student);
+            message = String.format("Added student %s %s", student.getFirstName(), student.getLastName());
         }
 
-        if (getStudent(student.firstName, student.lastName) != null) {
-            result = "Student is already in the exampreparation.university";
-        }
-
-        if (result == null) {
-            students.add(student);
-            result = "Added student " + student.getFirstName() + " " + student.getLastName();
-        }
-
-        return result;
+        return message;
     }
 
     public String dismissStudent(Student student) {
-        Student foundStudent = getStudent(student.getFirstName(), student.getLastName());
-
-        if (foundStudent == null) {
-            return "Student not found";
+        int indexOfStudent = this.students.indexOf(student);
+        if (indexOfStudent > -1) {
+            this.students.remove(indexOfStudent);
+            return String.format("Removed student %s %s", student.getFirstName(), student.getLastName());
         }
-
-        students.remove(student);
-
-        return "Removed student " + foundStudent.getFirstName() + " " + foundStudent.getLastName();
+        return "Student not found";
     }
 
     public Student getStudent(String firstName, String lastName) {
-        for (Student student : students) {
-            if (firstName.equals(student.getFirstName()) && lastName.equals(student.getLastName())) {
-                return student;
-            }
-        }
-        return null;
+        return this.students.stream()
+                .filter(st -> st.getFirstName().equals(firstName)
+                        && st.getLastName().equals(lastName))
+                .findFirst().orElse(null);
     }
 
     public String getStatistics() {
-        return students.stream()
-                .map(s -> String.format(
-                        "==Student: First Name = %s, Last Name = %s, Best Subject = %s",
-                        s.getFirstName(), s.getLastName(), s.getBestSubject()))
+        return (students.isEmpty()) ? ""
+                : students.stream()
+                .map(University::forStatistics)
                 .collect(Collectors.joining(System.lineSeparator()));
+    }
+
+    private static String forStatistics(Student student) {
+        return
+                String.format(
+                        "==Student: First Name = %s, Last Name = %s, Best Subject = %s"
+                        , student.getFirstName(), student.getLastName(), student.getBestSubject());
     }
 }
