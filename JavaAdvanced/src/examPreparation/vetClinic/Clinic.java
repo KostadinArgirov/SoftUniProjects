@@ -1,4 +1,4 @@
-package vetClinic;
+package examPreparation.vetClinic;
 
 import java.util.ArrayList;
 import java.util.Comparator;

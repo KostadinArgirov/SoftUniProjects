@@ -1,4 +1,4 @@
-package vetClinic;
+package examPreparation.vetClinic;
 
 public class Pet {
     private String name;

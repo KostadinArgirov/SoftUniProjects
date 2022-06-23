@@ -1,4 +1,4 @@
-package vetClinic;
+package examPreparation.vetClinic;
 
 public class Main {
     public static void main(String[] args) {
