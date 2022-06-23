@@ -1,4 +1,4 @@
-package examPreparation.easterBasket;
+package examPreparation;
 
 import java.util.Scanner;
 
