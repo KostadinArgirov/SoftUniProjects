@@ -1,4 +1,4 @@
-package greedyTimes;
+package oop.workingWithAbstractionExercise.greedyTimes;
 
 public class Item {
     private String name;
