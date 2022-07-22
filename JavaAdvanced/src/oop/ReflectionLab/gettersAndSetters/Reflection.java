@@ -1,4 +1,4 @@
-package oop.ReflectionLab.gettersAndSetters;
+package oop.reflectionLab.gettersAndSetters;
 
 import java.io.Serializable;
 

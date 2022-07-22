@@ -1,4 +1,4 @@
-package oop.ReflectionLab.reflection;
+package oop.reflectionLab.reflection;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package oop.ReflectionLab.highQualityMistakes;
+package oop.reflectionLab.highQualityMistakes;
 
 import java.io.Serializable;
 

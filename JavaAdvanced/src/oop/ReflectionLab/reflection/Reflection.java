@@ -1,4 +1,4 @@
-package oop.ReflectionLab.reflection;
+package oop.reflectionLab.reflection;
 
 import java.io.Serializable;
 

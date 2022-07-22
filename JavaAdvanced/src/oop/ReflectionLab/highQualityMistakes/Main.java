@@ -1,4 +1,4 @@
-package oop.ReflectionLab.highQualityMistakes;
+package oop.reflectionLab.highQualityMistakes;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
