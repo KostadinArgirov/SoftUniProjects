@@ -102,6 +102,7 @@ public class P02Python {
         int col;
 
         public Position() {
+
             this(0, 0);
         }
 
