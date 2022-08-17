@@ -43,7 +43,7 @@ public class P02Selling {
         if (collectedMoney >= 50) {
             System.out.println("Good news! You succeeded in collecting enough money!");
         } else {
-            System.out.println("Bad news, you are out of the examPreparation.bakery.");
+            System.out.println("Bad news, you are out of the bakery.");
         }
 
         System.out.printf("Money: %d%n", collectedMoney);
