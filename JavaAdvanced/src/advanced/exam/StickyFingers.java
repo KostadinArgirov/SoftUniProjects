@@ -9,15 +9,15 @@ public class StickyFingers {
     private static int colDillinger = -1;
     private static String command = null;
     private static char[][] matrix = null;
-    private static int stolenMoney = 0; //stolen money
+    private static int stolenMoney = 0;
     private static boolean isCaught = false;
 
     public static void main(String[] args) {
-        Scanner console = new Scanner(System.in);
-        matrixSize = Integer.parseInt(console.nextLine());
-        String[] commandsFromConsole = console.nextLine().split(",");
+        Scanner scanner = new Scanner(System.in);
+        matrixSize = Integer.parseInt(scanner.nextLine());
+        String[] commandsFromConsole = scanner.nextLine().split(",");
 
-        fillMatrix(console);
+        fillMatrix(scanner);
 
         for (String com : commandsFromConsole) {
             command = com;
