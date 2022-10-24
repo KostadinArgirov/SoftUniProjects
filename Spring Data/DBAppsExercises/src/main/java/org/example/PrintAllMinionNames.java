@@ -8,7 +8,7 @@ import java.util.ArrayDeque;
 
 public class PrintAllMinionNames {
 
-    static final String SELECT_ALL_MINIONS = "SELECT name FROM minions ORDER BY id";
+    private static final String SELECT_ALL_MINIONS = "SELECT name FROM minions ORDER BY id";
 
     public static void main(String[] args) throws SQLException {
         final Connection connection = Utils.getSQLConnection();
